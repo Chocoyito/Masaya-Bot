@@ -39,12 +39,10 @@ async def on_message(message):
     await message.channel.send(file=discord.File('resources/mp4.gif'))
 
   if message.content.startswith('$comandos'):
-    comandos = ["te quiero mucho"],
-    ["yon"],
-    ["leonel"],
-    ["sexo"],
-    ["$comandos"],
-    await message.channel.send(comandos)        
+    commandlist = ['te quiero mucho', 'yon', 'leonel', 'sexo','$comandos']
+    for a,b,c in zip(commandlist[::3],commandlist[1::3],commandlist[2::3]):
+        print '{:<30}{:<30}{:<}'.format(a,b,c)
+    await message.channel.send(commandlist)        
     
 
 print(os.getenv("TOKEN"))
