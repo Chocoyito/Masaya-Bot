@@ -48,6 +48,8 @@ async def on_message(message):
 
   if message.content.lower()=="infravalorada" :
     await message.channel.send(file=discord.File('resources/yichu.jpg'))
+  if message.content.lower()=="¿quien soy?":
+      await message.channel.send('vos sos @{}'.format(message.author.name))
 
 print(os.getenv("TOKEN"))
 client.run(os.getenv('TOKEN'))
