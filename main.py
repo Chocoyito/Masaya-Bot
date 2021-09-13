@@ -40,9 +40,10 @@ async def on_message(message):
 
   if message.content.startswith('$comandos'):
     commandlist = ['te quiero mucho', 'yon', 'leonel', 'sexo','$comandos']
-    for a,b,c in zip(commandlist[::3],commandlist[1::3],commandlist[2::3]):
-        print '{:<30}{:<30}{:<}'.format(a,b,c)
-    await message.channel.send(commandlist)        
+    comandos = commandlist
+    for a,b,c in zip(commandlist[::2],commandlist[2::3],commandlist[3::4]):
+        print ('{:<30}{:<30}{:<}'.format(a,b,c))
+    await message.channel.send(comandos)        
     
 
 print(os.getenv("TOKEN"))
