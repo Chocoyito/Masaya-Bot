@@ -40,9 +40,10 @@ async def on_message(message):
 
   if message.content.startswith('$comandos'):
     commandlist = ['te quiero mucho', 'yon', 'leonel', 'sexo','$comandos']
-    comandos = commandlist
+    comandos = ""
     for a,b,c in zip(commandlist[::2],commandlist[2::3],commandlist[3::4]):
-        print ('{:<30}{:<30}{:<}'.format(a,b,c))
+       print ('{:<30}{:<30}{:<}'.format(a,b,c))
+       comandos += commandlist
     await message.channel.send(comandos)        
     
 
