@@ -21,31 +21,33 @@ async def on_message(message):
   if message.author == client.user:
     return
 
-  if message.content.startswith('$frase'):
+  if message.content.lower()=="frase":
     quote=get_quote() 
     await message.channel.send(quote)
 
-  if message.content.startswith('yon'):
+  if message.content.lower()=="yon":
     await message.channel.send('Mi hombre')
     await message.channel.send(file=discord.File('resources/YON.jpg'))
 
-  if message.content.startswith('sexo'):
+  if message.content.lower()=="sexo":
     await message.channel.send('lo unico que no vas a heredar de tus padres')
 
-  if message.content.startswith('leonel'):
+  if message.content.lower()=="leonel":
     await message.channel.send(file=discord.File('resources/esposa.jpg'))
 
-  if message.content.startswith('te quiero mucho'):
+  if message.content.lower() == "te quiero mucho":
     await message.channel.send(file=discord.File('resources/mp4.gif'))
 
-  if message.content.startswith('$comandos'):
+  if message.content.lower()=="$comandos":
     commandlist = ['te quiero mucho', 'yon', 'leonel', 'sexo','$comandos']
     comandos = ""
+    comandos += commandlist
     for a,b,c in zip(commandlist[::2],commandlist[2::3],commandlist[3::4]):
        print ('{:<30}{:<30}{:<}'.format(a,b,c))
-       comandos += commandlist
-    await message.channel.send(comandos)        
-    
+    await message.channel.send(comandos)  
+
+  if message.content.lower()=="infravalorada" :
+    await message.channel.send(file=discord.File('resources/yichu.jpg'))
 
 print(os.getenv("TOKEN"))
 client.run(os.getenv('TOKEN'))
