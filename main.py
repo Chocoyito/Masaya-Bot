@@ -2,23 +2,28 @@ import discord
 import os
 import requests
 import json
+from discord.ext.commands import Bot
+from discord.ext import commands
+import asyncio
 
-client = discord.Client()
-
+PREFIX = ("$")
+bot = discord.ext.commands.Bot(command_prefix = "!");
 def get_quote():
   response = requests.get("https://zenquotes.io/api/random")
   json_data = json.loads(response.text)
   quote = json_data[0]['q'] + " -" + json_data[0]['a']
   return(quote)
 
-@client.event
+
+@bot.event
 async def on_ready():
   print('We have logged in as {0.user}'
-  .format(client))
+  .format(bot))
+  bot.loop.create_task(status_task()) # Create loop/task  
 
-@client.event
+@bot.event
 async def on_message(message):
-  if message.author == client.user:
+  if message.author == bot.user:
     return
 
   if message.content.lower()=="frase":
@@ -48,9 +53,22 @@ async def on_message(message):
 
   if message.content.lower()=="infravalorada" :
     await message.channel.send(file=discord.File('resources/yichu.jpg'))
+
   if message.content.lower()=="¿quien soy?":
       await message.channel.send('vos sos @{}'.format(message.author.name))
 
-print(os.getenv("TOKEN"))
-client.run(os.getenv('TOKEN'))
+  if message.content.startswith('paja'):
+        myid = '<@244069957187534848>'
+        await message.channel.send(message.channel, ' : %s is the best ' % myid)
 
+async def status_task():
+    while True:
+        await bot.change_presence(activity=discord.Game("turca"), status=discord.Status.online)
+        await asyncio.sleep(3) # Changes after x seconds
+        await bot.change_presence(activity=discord.Game("paja"), status=discord.Status.online)
+        await asyncio.sleep(3)
+        await bot.change_presence(activity=discord.Game("pornhub"), status=discord.Status.online)
+        await asyncio.sleep(3)
+
+print(os.getenv("TOKEN"))
+bot.run(os.getenv('TOKEN'))
