@@ -2,12 +2,13 @@ import discord
 import os
 import requests
 import json
-from discord.ext.commands import Bot
+from dotenv import load_dotenv
 from discord.ext import commands
 import asyncio
+load_dotenv()
 
-PREFIX = ("$")
-bot = discord.ext.commands.Bot(command_prefix = "!");
+
+bot = commands.Bot(command_prefix="$")
 def get_quote():
   response = requests.get("https://zenquotes.io/api/random")
   json_data = json.loads(response.text)
@@ -23,6 +24,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+  await bot.process_commands(message) 
   if message.author == bot.user:
     return
 
@@ -59,7 +61,7 @@ async def on_message(message):
 
   if message.content.startswith('paja'):
         myid = '<@244069957187534848>'
-        await message.channel.send(message.channel, ' : %s is the best ' % myid)
+        await message.channel.send(message.channel, ' : %s is the best ' % myid)    
 
 async def status_task():
     while True:
@@ -69,6 +71,10 @@ async def status_task():
         await asyncio.sleep(3)
         await bot.change_presence(activity=discord.Game("pornhub"), status=discord.Status.online)
         await asyncio.sleep(3)
+
+@bot.command()
+async def ping(ctx):
+  await ctx.channel.send('Pong!')
 
 print(os.getenv("TOKEN"))
 bot.run(os.getenv('TOKEN'))
