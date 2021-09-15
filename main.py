@@ -41,7 +41,7 @@ async def on_message(message):
     await message.channel.send(file=discord.File('resources/YON.jpg'))
 
   if message.content.lower()=="sexo":
-    await message.channel.send('lo unico que no vas a heredar de tus padres')
+    await message.channel.send('Lo unico que no vas a heredar de tus padres.')
 
   if message.content.lower()=="leonel":
     await message.channel.send(file=discord.File('resources/esposa.jpg'))
@@ -61,7 +61,7 @@ async def on_message(message):
     await message.channel.send(file=discord.File('resources/yichu.jpg'))
 
   if message.content.lower()=="¿quien soy?":
-      await message.channel.send('vos sos @{}'.format(message.author.name))
+      await message.channel.send('Vos sos @{}'.format(message.author.name))
 
   if message.content.startswith('paja'):
         myid = '<@244069957187534848>'
@@ -70,11 +70,11 @@ async def on_message(message):
 
 async def status_task():
     while True:
-        await bot.change_presence(activity=discord.Game("turca"), status=discord.Status.online)
+        await bot.change_presence(activity=discord.Game("Turca"), status=discord.Status.online)
         await asyncio.sleep(3) # Changes after x seconds
-        await bot.change_presence(activity=discord.Game("paja"), status=discord.Status.online)
+        await bot.change_presence(activity=discord.Game("Paja"), status=discord.Status.online)
         await asyncio.sleep(3)
-        await bot.change_presence(activity=discord.Game("pornhub"), status=discord.Status.online)
+        await bot.change_presence(activity=discord.Game("Pornhub"), status=discord.Status.online)
         await asyncio.sleep(3)
     await bot.process_commands()
     
