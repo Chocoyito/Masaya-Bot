@@ -6,6 +6,9 @@ from dotenv import load_dotenv
 from discord.ext import commands
 import asyncio
 load_dotenv()
+import tracemalloc
+
+tracemalloc.start()
 
 
 bot = commands.Bot(command_prefix="$")
@@ -20,11 +23,12 @@ def get_quote():
 async def on_ready():
   print('We have logged in as {0.user}'
   .format(bot))
-  bot.loop.create_task(status_task()) # Create loop/task  
+  bot.loop.create_task(status_task()) # Create loop/task
+  
 
 @bot.event
 async def on_message(message):
-  await bot.process_commands(message) 
+   
   if message.author == bot.user:
     return
 
@@ -62,6 +66,7 @@ async def on_message(message):
   if message.content.startswith('paja'):
         myid = '<@244069957187534848>'
         await message.channel.send(message.channel, ' : %is the best ' % myid)    
+  await bot.process_commands(message)
 
 async def status_task():
     while True:
@@ -74,13 +79,28 @@ async def status_task():
     await bot.process_commands()
     
 @bot.command(
-	help="Uses come crazy logic to determine if pong is actually the correct value or not.",
-	brief="Prints pong back to the channel."
+	help="Es para ver si el bot recibe ordenes",
+	brief="El bot devuelve Pong! si todo funciona bien."
 )
 async def ping(ctx):
   await ctx.channel.send('Pong!')
-  
+
+@bot.command(
+	# ADDS THIS VALUE TO THE $HELP PRINT MESSAGE.
+	help="$say (argumento)",
+	# ADDS THIS VALUE TO THE $HELP MESSAGE.
+	brief="Repite lo que escribiste"
+)
+async def say(ctx, *args):
+	response = ""
+
+	# LOOPS THROUGH THE LIST OF ARGUMENTS THAT THE USER INPUTS.
+	for arg in args:
+		response = response + " " + arg
+
+	# SENDS A MESSAGE TO THE CHANNEL USING THE CONTEXT OBJECT.
+	await ctx.channel.send(response)
   
 
-print(os.getenv("TOKEN"))
+
 bot.run(os.getenv('TOKEN'))
