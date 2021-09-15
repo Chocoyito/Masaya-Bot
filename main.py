@@ -61,7 +61,7 @@ async def on_message(message):
 
   if message.content.startswith('paja'):
         myid = '<@244069957187534848>'
-        await message.channel.send(message.channel, ' : %s is the best ' % myid)    
+        await message.channel.send(message.channel, ' : %is the best ' % myid)    
 
 async def status_task():
     while True:
@@ -71,10 +71,16 @@ async def status_task():
         await asyncio.sleep(3)
         await bot.change_presence(activity=discord.Game("pornhub"), status=discord.Status.online)
         await asyncio.sleep(3)
-
-@bot.command()
+    await bot.process_commands()
+    
+@bot.command(
+	help="Uses come crazy logic to determine if pong is actually the correct value or not.",
+	brief="Prints pong back to the channel."
+)
 async def ping(ctx):
   await ctx.channel.send('Pong!')
+  
+  
 
 print(os.getenv("TOKEN"))
 bot.run(os.getenv('TOKEN'))
