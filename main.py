@@ -75,7 +75,7 @@ async def on_message(message):
 async def status_task():
     while True:
         await bot.change_presence(activity=discord.Game("Turca"), status=discord.Status.online)
-        await asyncio.sleep(3) # Changes after x seconds
+        await asyncio.sleep(3) # cambia luego de x segundos
         await bot.change_presence(activity=discord.Game("Paja"), status=discord.Status.online)
         await asyncio.sleep(3)
         await bot.change_presence(activity=discord.Game("Pornhub"), status=discord.Status.online)
@@ -98,11 +98,11 @@ async def ping(ctx):
 async def say(ctx, *args):
 	response = ""
 
-	# LOOPS THROUGH THE LIST OF ARGUMENTS THAT THE USER INPUTS.
+	# Itera el ciclo
 	for arg in args:
 		response = response + " " + arg
 
-	# SENDS A MESSAGE TO THE CHANNEL USING THE CONTEXT OBJECT.
+	# manda un mensaje al canal usando el contexto de objeto
 	await ctx.channel.send(response)
   
 class Player(commands.Cog):
@@ -158,7 +158,7 @@ class Player(commands.Cog):
         if ctx.voice_client is None:
             return await ctx.send("Tengo que estar metida en un canal de voz.")
 
-        # handle song where song isn't url
+        # trata la cancion cuando no es un url
         if not ("youtube.com/watch?" in song or "https://youtu.be/" in song):
             await ctx.send("Buscando tu mierda, dame chance.")
 
@@ -201,7 +201,7 @@ class Player(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def queue(self, ctx): # display the current guilds queue
+    async def queue(self, ctx): # muestra la cola de servidor actual
         if len(self.song_queue[ctx.guild.id]) == 0:
             return await ctx.send("No hay canciones en cola actualmente.")
 
@@ -231,13 +231,13 @@ class Player(commands.Cog):
         poll.add_field(name="Stay", value=":no_entry_sign:")
         poll.set_footer(text="Voting ends in 15 seconds.")
 
-        poll_msg = await ctx.send(embed=poll) # only returns temporary message, we need to get the cached message to get the reactions
+        poll_msg = await ctx.send(embed=poll) # mensaje temporal para las reacciones
         poll_id = poll_msg.id
 
         await poll_msg.add_reaction(u"\u2705") # yes
         await poll_msg.add_reaction(u"\U0001F6AB") # no
         
-        await asyncio.sleep(15) # 15 seconds to vote
+        await asyncio.sleep(15) # 15 segundos para votar
 
         poll_msg = await ctx.channel.fetch_message(poll_id)
         
