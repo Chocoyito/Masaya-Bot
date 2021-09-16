@@ -7,11 +7,14 @@ from discord.ext import commands
 import asyncio
 load_dotenv()
 import tracemalloc
+from music import Player
 
+intents = discord.Intents.default()
+intents.members = True
+
+bot = commands.Bot(command_prefix="$",intents=intents)
 tracemalloc.start()
 
-
-bot = commands.Bot(command_prefix="$")
 def get_quote():
   response = requests.get("https://zenquotes.io/api/random")
   json_data = json.loads(response.text)
@@ -24,7 +27,11 @@ async def on_ready():
   print('We have logged in as {0.user}'
   .format(bot))
   bot.loop.create_task(status_task()) # Create loop/task
-  
+
+async def setup():
+  await bot.wait_until_ready
+  bot.add_cog(Player(bot))
+  bot.loop.create_task(setup())
 
 @bot.event
 async def on_message(message):
@@ -101,6 +108,5 @@ async def say(ctx, *args):
 	# SENDS A MESSAGE TO THE CHANNEL USING THE CONTEXT OBJECT.
 	await ctx.channel.send(response)
   
-
 
 bot.run(os.getenv('TOKEN'))
