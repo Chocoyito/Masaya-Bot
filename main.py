@@ -174,10 +174,10 @@ class Player(commands.Cog):
 
             if queue_len < 10:
                 self.song_queue[ctx.guild.id].append(song)
-                return await ctx.send(f"I am currently playing a song, this song has been added to the queue at position: {queue_len+1}.")
+                return await ctx.send(f"Estoy reproduciendo una musica ahora mismo, la cancion que pusiste fue agregada a la posision: {queue_len+1}.")
 
             else:
-                return await ctx.send("Sorry, I can only queue up to 10 songs, please wait for the current song to finish.")
+                return await ctx.send("No puedo añadir a la cola más de 10 canciones.")
 
         await self.play_song(ctx, song)
         await ctx.send(f"Reproduciendo: {song}")
