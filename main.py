@@ -1,8 +1,9 @@
 import discord
+from leveling import bot
+from dotenv import load_dotenv
 import os
 import requests
 import json
-from dotenv import load_dotenv
 from discord.ext import commands
 import asyncio
 load_dotenv()
@@ -67,9 +68,10 @@ async def on_message(message):
   if message.content.lower()=="¿quien soy?":
       await message.channel.send('Vos sos @{}'.format(message.author.name))
 
-  if message.content.startswith('paja'):
-        myid = '<@244069957187534848>'
-        await message.channel.send(message.channel, ' : %is the best ' % myid)    
+  if message.content.lower()=="elpepe":
+    await message.channel.send(file=discord.File('resources/elpepe.mp4'))
+
+
   await bot.process_commands(message)
 
 async def status_task():
