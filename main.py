@@ -1,5 +1,4 @@
 import discord
-from leveling import bot
 from dotenv import load_dotenv
 import os
 import requests
@@ -29,6 +28,9 @@ async def on_ready():
   print('We have logged in as {0.user}'
   .format(bot))
   bot.loop.create_task(status_task()) # Create loop/task
+async def setup():
+  await bot.wait_until_ready()
+  bot.add.cog(Player(bot))
 
 
 @bot.event
@@ -76,12 +78,14 @@ async def on_message(message):
 
 async def status_task():
     while True:
-        await bot.change_presence(activity=discord.Game("Turca"), status=discord.Status.online)
+        await bot.change_presence(activity=discord.Game("Turca"), status=discord.Status.idle)
         await asyncio.sleep(3) # cambia luego de x segundos
-        await bot.change_presence(activity=discord.Game("Paja"), status=discord.Status.online)
+        await bot.change_presence(activity=discord.Game("Paja"), status=discord.Status.idle)
         await asyncio.sleep(3)
-        await bot.change_presence(activity=discord.Game("Pornhub"), status=discord.Status.online)
+        await bot.change_presence(activity=discord.Game("Pornhub"), status=discord.Status.idle)
         await asyncio.sleep(3)
+        await bot.change_presence(activity=discord.Streaming(name='TurboC es completamente basura', url='https://www.twitch.tv/tugfammg'))
+        await asyncio.sleep(15)
     await bot.process_commands()
     
 @bot.command(
@@ -107,6 +111,17 @@ async def say(ctx, *args):
 	# manda un mensaje al canal usando el contexto de objeto
 	await ctx.channel.send(response)
   
+@bot.command(
+	help="Documentacion de C modo grafico",
+	brief="Lanza documentacion de C grafico"
+)
+async def docgrafico(ctx):
+  await ctx.channel.send('Documentancion de C grafico')
+  await ctx.channel.send(file=discord.File('Documentacion/Doc.pdf'))
+  await ctx.channel.send(file=discord.File('Documentacion/EJEM1.c'))
+
+
+
 class Player(commands.Cog):
     def __init__(self, bot):
         self.bot = bot 
@@ -183,6 +198,7 @@ class Player(commands.Cog):
 
         await self.play_song(ctx, song)
         await ctx.send(f"Reproduciendo: {song}")
+       
 
     @commands.command()
     async def search(self, ctx, *, song=None):
@@ -231,7 +247,7 @@ class Player(commands.Cog):
         poll = discord.Embed(title=f"Votacion para quitar por - {ctx.author.name}#{ctx.author.discriminator}", description="**80% del canal de voz tiene que estar de acuerdo para quitarla.**", colour=discord.Colour.blue())
         poll.add_field(name="Skip", value=":white_check_mark:")
         poll.add_field(name="Stay", value=":no_entry_sign:")
-        poll.set_footer(text="Voting ends in 15 seconds.")
+        poll.set_footer(text="Votación termina en 15 segundos.")
 
         poll_msg = await ctx.send(embed=poll) # mensaje temporal para las reacciones
         poll_id = poll_msg.id
