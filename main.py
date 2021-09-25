@@ -56,13 +56,8 @@ async def on_message(message):
   if message.content.lower() == "te quiero mucho":
     await message.channel.send(file=discord.File('resources/mp4.gif'))
 
-  if message.content.lower()=="$comandos":
-    commandlist = ['te quiero mucho', 'yon', 'leonel', 'sexo','$comandos']
-    comandos = ""
-    comandos += commandlist
-    for a,b,c in zip(commandlist[::2],commandlist[2::3],commandlist[3::4]):
-       print ('{:<30}{:<30}{:<}'.format(a,b,c))
-    await message.channel.send(comandos)  
+  if message.content.lower() == "passchipeada":
+    await message.channel.send(file=discord.File('resources/leonel.c'))
 
   if message.content.lower()=="infravalorada" :
     await message.channel.send(file=discord.File('resources/yichu.jpg'))
@@ -73,12 +68,43 @@ async def on_message(message):
   if message.content.lower()=="elpepe":
     await message.channel.send(file=discord.File('resources/elpepe.mp4'))
 
+  if message.content.lower()=="crudninja":
+    await message.channel.send(file=discord.File('TAREAS/pipe.c'))
+    await message.channel.send(file=discord.File('TAREAS/tupapa.h'))
+    await message.channel.send(file=discord.File('TAREAS/CRUD.rar'))
+
+  if message.content.lower()=="grevinpaja":
+    await message.channel.send(file=discord.File('TAREAS/Munecos.C'))
+    await message.channel.send(file=discord.File('TAREAS/tupapa.h'))
+    await message.channel.send(file=discord.File('TAREAS/MARIOBROS.h'))
+
+  if message.content.lower()=="lovo":
+    await message.channel.send(file=discord.File('resources/lovo.mp4'))
+
+  if message.content.lower()=="*dormir*":
+    await message.channel.send('¿Vamos a dormir U//U?')
+    await message.channel.send(file=discord.File('waifu/dormir.png'))
+  
+  if message.content.lower()=="*me siento triste*":
+    await message.channel.send('¿Que tenés bb? contame u.u')
+    await message.channel.send(file=discord.File('waifu/triste.gif'))
+
+  if message.content.lower()=="*te cuento*":
+    await message.channel.send('contame')
+    await message.channel.send(file=discord.File('waifu/contame.gif'))
+
+  if message.content.lower().startswith("lo que pasa es que"):
+    await message.channel.send('¿Y como te hace sentir eso?')
+    await message.channel.send(file=discord.File('waifu/feeling.gif'))
+
+  if message.content.lower()=="logouni3d":
+    await message.channel.send(file=discord.File('resources/cuento.c'))
 
   await bot.process_commands(message)
 
 async def status_task():
     while True:
-        await bot.change_presence(activity=discord.Game("Turca"), status=discord.Status.idle)
+        await bot.change_presence(activity=discord.Game("Lovo lindo"), status=discord.Status.idle)
         await asyncio.sleep(3) # cambia luego de x segundos
         await bot.change_presence(activity=discord.Game("Paja"), status=discord.Status.idle)
         await asyncio.sleep(3)
@@ -86,6 +112,7 @@ async def status_task():
         await asyncio.sleep(3)
         await bot.change_presence(activity=discord.Streaming(name='TurboC es completamente basura', url='https://www.twitch.tv/tugfammg'))
         await asyncio.sleep(15)
+        await bot.change_presence(activity=discord.Streaming (name='Roberto lindo', url='https://www.twitch.tv/tugfammg'))
     await bot.process_commands()
     
 @bot.command(
@@ -255,7 +282,7 @@ class Player(commands.Cog):
         await poll_msg.add_reaction(u"\u2705") # yes
         await poll_msg.add_reaction(u"\U0001F6AB") # no
         
-        await asyncio.sleep(15) # 15 segundos para votar
+        await asyncio.sleep(5) # 15 segundos para votar
 
         poll_msg = await ctx.channel.fetch_message(poll_id)
         
