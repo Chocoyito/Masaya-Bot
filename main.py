@@ -28,9 +28,7 @@ async def on_ready():
   print('We have logged in as {0.user}'
   .format(bot))
   bot.loop.create_task(status_task()) # Create loop/task
-async def setup():
-  await bot.wait_until_ready()
-  bot.add.cog(Player(bot))
+
 
 
 @bot.event
@@ -339,6 +337,7 @@ class Player(commands.Cog):
 async def setup():
     await bot.wait_until_ready()
     bot.add_cog(Player(bot))
+
 
 bot.loop.create_task(setup())
 
