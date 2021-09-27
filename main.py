@@ -194,7 +194,7 @@ async def status_task():
         await bot.change_presence(activity=discord.Game("Pornhub"), status=discord.Status.idle)
         await asyncio.sleep(3)
         await bot.change_presence(activity=discord.Streaming(name='TurboC es completamente basura', url='https://www.twitch.tv/tugfammg'))
-        await asyncio.sleep(15)
+        await asyncio.sleep(3)
         await bot.change_presence(activity=discord.Streaming (name='Roberto lindo', url='https://www.twitch.tv/tugfammg'))
     await bot.process_commands(status_task)
 
@@ -282,7 +282,20 @@ async def on_message(message):
 async def setup():
     await bot.wait_until_ready()
 
+async def on_message_delete(self, message):
+        msg = f"{message.author} has deleted the message: {message.content}"
+        await message.channel.send(msg)
 
+@bot.command()
+async def repeat(ctx, times: int, content="repeating..."):
+    """Repeats a message multiple times."""
+    for i in range(times):
+        await ctx.send(content)
+
+@bot.command()
+async def joined(ctx, member: discord.Member):
+    """Says when a member joined."""
+    await ctx.send(f"{member.name} Entro una puta en {member.joined_at}")
 
 
 
