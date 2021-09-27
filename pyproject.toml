@@ -16,6 +16,8 @@ ffmpeg = "^1.4"
 easy-pil = "^0.0.9"
 disrank = "^0.0.2"
 asyncpg = "^0.24.0"
+task = "^0.2.5"
+tasks = "^2.8.0"
 
 [tool.poetry.dev-dependencies]
 

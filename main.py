@@ -8,7 +8,6 @@ import asyncio
 load_dotenv()
 import tracemalloc
 import youtube_dl
-import pafy
 
 intents = discord.Intents.default()
 intents.members = True
@@ -186,10 +185,27 @@ bot = commands.Bot(
 )
 
 @bot.event
+async def status_task():
+    while True:
+        await bot.change_presence(activity=discord.Game("Lovo lindo"), status=discord.Status.idle)
+        await asyncio.sleep(3) # cambia luego de x segundos
+        await bot.change_presence(activity=discord.Game("Paja"), status=discord.Status.idle)
+        await asyncio.sleep(3)
+        await bot.change_presence(activity=discord.Game("Pornhub"), status=discord.Status.idle)
+        await asyncio.sleep(3)
+        await bot.change_presence(activity=discord.Streaming(name='TurboC es completamente basura', url='https://www.twitch.tv/tugfammg'))
+        await asyncio.sleep(15)
+        await bot.change_presence(activity=discord.Streaming (name='Roberto lindo', url='https://www.twitch.tv/tugfammg'))
+    await bot.process_commands(status_task)
+
+
+@bot.event
 async def on_ready():
   print('We have logged in as {0.user}'
   .format(bot))
   bot.loop.create_task(status_task()) # Create loop/task
+
+
 
 @bot.event
 async def on_message(message):
@@ -260,20 +276,11 @@ async def on_message(message):
 
   await bot.process_commands(message)
 
-@bot.event
-async def status_task():
-    while True:
-        await bot.change_presence(activity=discord.Game("Lovo lindo"), status=discord.Status.idle)
-        await asyncio.sleep(3) # cambia luego de x segundos
-        await bot.change_presence(activity=discord.Game("Paja"), status=discord.Status.idle)
-        await asyncio.sleep(3)
-        await bot.change_presence(activity=discord.Game("Pornhub"), status=discord.Status.idle)
-        await asyncio.sleep(3)
-        await bot.change_presence(activity=discord.Streaming(name='TurboC es completamente basura', url='https://www.twitch.tv/tugfammg'))
-        await asyncio.sleep(15)
-        await bot.change_presence(activity=discord.Streaming (name='Roberto lindo', url='https://www.twitch.tv/tugfammg'))
-    await bot.process_commands(status_task)
 
+
+
+async def setup():
+    await bot.wait_until_ready()
 
 
 
@@ -281,7 +288,7 @@ async def status_task():
 
 
 bot.add_cog(Music(bot))
-bot.loop.create_task(status_task())
+bot.loop.create_task(setup())
 
 
 bot.run(os.getenv('TOKEN'))
