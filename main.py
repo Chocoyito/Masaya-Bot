@@ -24,34 +24,6 @@ def get_quote():
     return (quote)
 
 
-@bot.command(help="Es para ver si el bot recibe ordenes",
-             brief="El bot devuelve Pong! si todo funciona bien.")
-async def ping(ctx):
-    await ctx.channel.send('Pong!')
-
-
-@bot.command(
-    # ADDS THIS VALUE TO THE $HELP PRINT MESSAGE.
-    help="$say (argumento)",
-    # ADDS THIS VALUE TO THE $HELP MESSAGE.
-    brief="Repite lo que escribiste")
-async def say(ctx, *args):
-    response = ""
-
-    # Itera el ciclo
-    for arg in args:
-        response = response + " " + arg
-
-    # manda un mensaje al canal usando el contexto de objeto
-    await ctx.channel.send(response)
-
-
-@bot.command(help="Documentacion de C modo grafico",
-             brief="Lanza documentacion de C grafico")
-async def docgrafico(ctx):
-    await ctx.channel.send('Documentancion de C grafico')
-    await ctx.channel.send(file=discord.File('Documentacion/Doc.pdf'))
-    await ctx.channel.send(file=discord.File('Documentacion/EJEM1.c'))
 
 
 youtube_dl.utils.bug_reports_message = lambda: ""
@@ -216,7 +188,6 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-
     if message.author == bot.user:
         return
 
@@ -227,6 +198,10 @@ async def on_message(message):
     if message.content.lower() == "yon":
         await message.channel.send('Mi hombre')
         await message.channel.send(file=discord.File('resources/YON.jpg'))
+    
+    if message.content.lower() == "poia":
+        await message.channel.send('x')
+        await message.channel.send(file=discord.File('resources/Mago.jpg'))
 
     if message.content.lower() == "sexo":
         await message.channel.send(
@@ -306,6 +281,34 @@ async def repeat(ctx, times: int, content="repeating..."):
 async def joined(ctx, member: discord.Member):
     """Says when a member joined."""
     await ctx.send(f"{member.name} Entro una puta en {member.joined_at}")
+
+@bot.command(
+    # ADDS THIS VALUE TO THE $HELP PRINT MESSAGE.
+    help="$say (argumento)",
+    # ADDS THIS VALUE TO THE $HELP MESSAGE.
+    brief="Repite lo que escribiste")
+    
+async def say(ctx, *args):
+    response = ""
+  # Itera el ciclo
+    for arg in args:
+        response = response + " " + arg
+
+    # manda un mensaje al canal usando el contexto de objeto
+    await ctx.channel.send(response)
+
+@bot.command(help="Es para ver si el bot recibe ordenes",
+             brief="El bot devuelve Pong! si todo funciona bien.")
+async def ping(ctx):
+    await ctx.channel.send('Pong!')
+
+
+@bot.command(help="Documentacion de C modo grafico",
+             brief="Lanza documentacion de C grafico")
+async def docgrafico(ctx):
+    await ctx.channel.send('Documentancion de C grafico')
+    await ctx.channel.send(file=discord.File('Documentacion/Doc.pdf'))
+    await ctx.channel.send(file=discord.File('Documentacion/EJEM1.c'))
 
 
 bot.add_cog(Music(bot))
