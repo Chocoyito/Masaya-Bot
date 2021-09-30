@@ -1,3 +1,4 @@
+
 import discord
 from dotenv import load_dotenv
 import os
@@ -22,9 +23,6 @@ def get_quote():
     json_data = json.loads(response.text)
     quote = json_data[0]['q'] + " -" + json_data[0]['a']
     return (quote)
-
-
-
 
 youtube_dl.utils.bug_reports_message = lambda: ""
 
@@ -78,7 +76,7 @@ class Music(commands.Cog):
 
     @commands.command()
     async def join(self, ctx, *, channel: discord.VoiceChannel):
-        """Joins a voice channel"""
+        """Entra a un canal de voz"""
 
         if ctx.voice_client is not None:
             return await ctx.voice_client.move_to(channel)
@@ -87,18 +85,18 @@ class Music(commands.Cog):
 
     @commands.command()
     async def play(self, ctx, *, query):
-        """Plays a file from the local filesystem"""
-
+        """Reproduce una cancion almacenada en el bot"""
+        
         source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query))
         ctx.voice_client.play(source,
                               after=lambda e: print(f"Player error: {e}")
                               if e else None)
 
-        await ctx.send(f"Now playing: {query}")
+        await ctx.send(f"Reproduciendo: {query}")
 
     @commands.command()
     async def yt(self, ctx, *, url):
-        """Plays from a url (almost anything youtube_dl supports)"""
+        """Reproduce desde un url (todo lo que pueda soportar youtube_dl)"""
 
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop)
@@ -106,11 +104,11 @@ class Music(commands.Cog):
                                   after=lambda e: print(f"Player error: {e}")
                                   if e else None)
 
-        await ctx.send(f"Now playing: {player.title}")
+        await ctx.send(f"Reproduciendo: {player.title}")
 
     @commands.command()
     async def stream(self, ctx, *, url):
-        """Streams from a url (same as yt, but doesn't predownload)"""
+        """Streamea desde un url (lo mismo que yt, pero no lo descarga)"""
 
         async with ctx.typing():
             player = await YTDLSource.from_url(url,
@@ -120,21 +118,21 @@ class Music(commands.Cog):
                                   after=lambda e: print(f"Player error: {e}")
                                   if e else None)
 
-        await ctx.send(f"Now playing: {player.title}")
+        await ctx.send(f"Reproduciendo: {player.title}")
 
     @commands.command()
     async def volume(self, ctx, volume: int):
-        """Changes the player's volume"""
+        """Cambia el volumen del bot"""
 
         if ctx.voice_client is None:
-            return await ctx.send("Not connected to a voice channel.")
+            return await ctx.send("No estoy conectada a un canal de voz.")
 
         ctx.voice_client.source.volume = volume / 100
-        await ctx.send(f"Changed volume to {volume}%")
+        await ctx.send(f"Cambia el volumen a{volume}%")
 
     @commands.command()
     async def stop(self, ctx):
-        """Stops and disconnects the bot from voice"""
+        """Para y desconecta al bot del canal"""
 
         await ctx.voice_client.disconnect()
 
@@ -146,7 +144,7 @@ class Music(commands.Cog):
             if ctx.author.voice:
                 await ctx.author.voice.channel.connect()
             else:
-                await ctx.send("You are not connected to a voice channel.")
+                await ctx.send("No estas conectado a un canal de voz UwU.")
                 raise commands.CommandError(
                     "Author not connected to a voice channel.")
         elif ctx.voice_client.is_playing():
@@ -155,7 +153,7 @@ class Music(commands.Cog):
 
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or("$"),
-    description="Relatively simple music bot example",
+    description="Sangre Nueva pa",
 )
 
 
@@ -199,9 +197,11 @@ async def on_message(message):
         await message.channel.send('Mi hombre')
         await message.channel.send(file=discord.File('resources/YON.jpg'))
     
-    if message.content.lower() == "poia":
-        await message.channel.send('x')
+    if message.content.lower() == "elmago":
         await message.channel.send(file=discord.File('resources/Mago.jpg'))
+
+    if message.content.lower() == "digod":
+        await message.channel.send(file=discord.File('resources/Digod.jpg'))
 
     if message.content.lower() == "sexo":
         await message.channel.send(
@@ -230,6 +230,9 @@ async def on_message(message):
         await message.channel.send(file=discord.File('TAREAS/tupapa.h'))
         await message.channel.send(file=discord.File('TAREAS/CRUD.rar'))
 
+    if message.content.startswith("!hello"):
+            await message.reply("Hello!", mention_author=True)
+
     if message.content.lower() == "grevinpaja":
         await message.channel.send(file=discord.File('TAREAS/Munecos.C'))
         await message.channel.send(file=discord.File('TAREAS/tupapa.h'))
@@ -239,7 +242,7 @@ async def on_message(message):
         await message.channel.send(file=discord.File('resources/lovo.mp4'))
 
     if message.content.lower() == "*dormir*":
-        await message.channel.send('¿Vamos a dormir (。U⁄ ⁄ω⁄ ⁄ U。)??')
+        await message.reply('¿Vamos a dormir (。U⁄ ⁄ω⁄ ⁄ U。)??', mention_author=True)
         await message.add_reaction("😳")
         await message.channel.send(file=discord.File('waifu/dormir.png'))
 
