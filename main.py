@@ -313,7 +313,12 @@ async def docgrafico(ctx):
     await ctx.channel.send(file=discord.File('Documentacion/Doc.pdf'))
     await ctx.channel.send(file=discord.File('Documentacion/EJEM1.c'))
 
-
+@bot.command(help="Complejidad de algoritmos",
+brief="Resumen para medir la complejidad de una estructura de datos en un ejecucion de tiempo real en un algoritmo con soluciones de fuerza bruta")
+async def algorspeed(ctx):
+  await ctx.channel.send('Complejidad de algoritmo')
+  await ctx.channel.send(file=discord.File('resources/complejidad.txt'))
+  
 bot.add_cog(Music(bot))
 bot.loop.create_task(setup())
 
