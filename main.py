@@ -160,7 +160,7 @@ bot = commands.Bot(
 @bot.event
 async def status_task():
     while True:
-        await bot.change_presence(activity=discord.Game("Lovo lindo"),
+        await bot.change_presence(activity=discord.Game("Lov lindo"),
                                   status=discord.Status.idle)
         await asyncio.sleep(3)  # cambia luego de x segundos
         await bot.change_presence(activity=discord.Game("Paja"),
@@ -170,11 +170,11 @@ async def status_task():
                                   status=discord.Status.idle)
         await asyncio.sleep(3)
         await bot.change_presence(
-            activity=discord.Streaming(name='TurboC es completamente basura',
+            activity=discord.Streaming(name='TurboC es completamente bueno',
                                        url='https://www.twitch.tv/tugfammg'))
         await asyncio.sleep(3)
         await bot.change_presence(activity=discord.Streaming(
-            name='Roberto lindo', url='https://www.twitch.tv/tugfammg'))
+            name='Lindos', url='https://www.twitch.tv/tugfammg'))
     await bot.process_commands(status_task)
 
 
@@ -193,9 +193,6 @@ async def on_message(message):
         quote = get_quote()
         await message.channel.send(quote)
 
-    if message.content.lower() == "yon":
-        await message.channel.send('Mi hombre')
-        await message.channel.send(file=discord.File('resources/YON.jpg'))
     
     if message.content.lower() == "elmago":
         await message.channel.send(file=discord.File('resources/Mago.jpg'))
@@ -203,21 +200,14 @@ async def on_message(message):
     if message.content.lower() == "digod":
         await message.channel.send(file=discord.File('resources/Digod.jpg'))
 
-    if message.content.lower() == "sexo":
-        await message.channel.send(
-            'Lo unico que no vas a heredar de tus padres.')
-
-    if message.content.lower() == "leonel":
-        await message.channel.send(file=discord.File('resources/esposa.jpg'))
 
     if message.content.lower() == "te quiero mucho":
         await message.channel.send(file=discord.File('resources/mp4.gif'))
+
         await message.add_reaction("🥰")
     if message.content.lower() == "passchipeada":
         await message.channel.send(file=discord.File('resources/leonel.c'))
 
-    if message.content.lower() == "infravalorada":
-        await message.channel.send(file=discord.File('resources/yichu.jpg'))
 
     if message.content.lower() == "¿quien soy?":
         await message.channel.send('Vos sos @{}'.format(message.author.name))
@@ -233,7 +223,7 @@ async def on_message(message):
     if message.content.startswith("!hello"):
             await message.reply("Hello!", mention_author=True)
 
-    if message.content.lower() == "grevinpaja":
+    if message.content.lower() == "grevingod":
         await message.channel.send(file=discord.File('TAREAS/Munecos.C'))
         await message.channel.send(file=discord.File('TAREAS/tupapa.h'))
         await message.channel.send(file=discord.File('TAREAS/MARIOBROS.h'))
@@ -241,22 +231,6 @@ async def on_message(message):
     if message.content.lower() == "lovo":
         await message.channel.send(file=discord.File('resources/lovo.mp4'))
 
-    if message.content.lower() == "*dormir*":
-        await message.reply('¿Vamos a dormir (。U⁄ ⁄ω⁄ ⁄ U。)??', mention_author=True)
-        await message.add_reaction("😳")
-        await message.channel.send(file=discord.File('waifu/dormir.png'))
-
-    if message.content.lower() == "*me siento triste*":
-        await message.channel.send('¿Que tenés bb? contame u.u')
-        await message.channel.send(file=discord.File('waifu/triste.gif'))
-
-    if message.content.lower() == "*te cuento*":
-        await message.channel.send('contame')
-        await message.channel.send(file=discord.File('waifu/contame.gif'))
-
-    if message.content.lower().startswith("lo que pasa es que"):
-        await message.channel.send('¿Y como te hace sentir eso?')
-        await message.channel.send(file=discord.File('waifu/feeling.gif'))
 
     if message.content.lower() == "logouni3d":
         await message.channel.send(file=discord.File('resources/cuento.c'))
