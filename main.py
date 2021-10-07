@@ -6,7 +6,7 @@ import requests
 import json
 from discord.ext import commands
 import asyncio
-
+#:p
 load_dotenv()
 import tracemalloc
 import youtube_dl
@@ -38,7 +38,7 @@ ytdl_format_options = {
     "no_warnings": True,
     "default_search": "auto",
     "source_address":
-    "0.0.0.0",  # bind to ipv4 since ipv6 addresses cause issues sometimes
+    "0.0.0.0", 
 }
 
 ffmpeg_options = {"options": "-vn"}
@@ -160,13 +160,13 @@ bot = commands.Bot(
 @bot.event
 async def status_task():
     while True:
-        await bot.change_presence(activity=discord.Game("Lov lindo"),
+        await bot.change_presence(activity=discord.Game("Hola"),
                                   status=discord.Status.idle)
         await asyncio.sleep(3)  # cambia luego de x segundos
         await bot.change_presence(activity=discord.Game("Paja"),
                                   status=discord.Status.idle)
         await asyncio.sleep(3)
-        await bot.change_presence(activity=discord.Game("Pornhub"),
+        await bot.change_presence(activity=discord.Game("Yuca"),
                                   status=discord.Status.idle)
         await asyncio.sleep(3)
         await bot.change_presence(
@@ -181,7 +181,7 @@ async def status_task():
 @bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
-    bot.loop.create_task(status_task())  # Create loop/task
+    bot.loop.create_task(status_task()) #crea el loop para los change_presence
 
 
 @bot.event
@@ -223,17 +223,19 @@ async def on_message(message):
     if message.content.startswith("!hello"):
             await message.reply("Hello!", mention_author=True)
 
-    if message.content.lower() == "grevingod":
+    if message.content.lower() == "TC20":
         await message.channel.send(file=discord.File('TAREAS/Munecos.C'))
         await message.channel.send(file=discord.File('TAREAS/tupapa.h'))
         await message.channel.send(file=discord.File('TAREAS/MARIOBROS.h'))
 
-    if message.content.lower() == "lovo":
+    if message.content.lower() == "GOD":
         await message.channel.send(file=discord.File('resources/lovo.mp4'))
 
 
     if message.content.lower() == "logouni3d":
         await message.channel.send(file=discord.File('resources/cuento.c'))
+    if message.content.lower() == "chepito":
+        await message.channel.send(file=discord.File('video.mp4'))
 
     await bot.process_commands(message)
 
@@ -242,22 +244,18 @@ async def setup():
     await bot.wait_until_ready()
 
 
-async def on_message_delete(self, message):
-    msg = f"{message.author} has deleted the message: {message.content}"
-    await message.channel.send(msg)
-
 
 @bot.command()
 async def repeat(ctx, times: int, content="repeating..."):
-    """Repeats a message multiple times."""
+    """Repite un mensaje muchas veces."""
     for i in range(times):
         await ctx.send(content)
 
 
 @bot.command()
 async def joined(ctx, member: discord.Member):
-    """Says when a member joined."""
-    await ctx.send(f"{member.name} Entro una puta en {member.joined_at}")
+    """Te dice cuando entro un miembro."""
+    await ctx.send(f"{member.name} Entro en{member.joined_at}")
 
 @bot.command(
     # ADDS THIS VALUE TO THE $HELP PRINT MESSAGE.
