@@ -6,7 +6,7 @@ import requests
 import json
 from discord.ext import commands
 import asyncio
-#:p
+
 load_dotenv()
 import tracemalloc
 import youtube_dl
@@ -38,7 +38,7 @@ ytdl_format_options = {
     "no_warnings": True,
     "default_search": "auto",
     "source_address":
-    "0.0.0.0", 
+    "0.0.0.0",  # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
 
 ffmpeg_options = {"options": "-vn"}
@@ -160,28 +160,28 @@ bot = commands.Bot(
 @bot.event
 async def status_task():
     while True:
-        await bot.change_presence(activity=discord.Game("Hola"),
+        await bot.change_presence(activity=discord.Game("Lovo lindo"),
                                   status=discord.Status.idle)
         await asyncio.sleep(3)  # cambia luego de x segundos
         await bot.change_presence(activity=discord.Game("Paja"),
                                   status=discord.Status.idle)
         await asyncio.sleep(3)
-        await bot.change_presence(activity=discord.Game("Yuca"),
+        await bot.change_presence(activity=discord.Game("Pornhub"),
                                   status=discord.Status.idle)
         await asyncio.sleep(3)
         await bot.change_presence(
-            activity=discord.Streaming(name='TurboC es completamente bueno',
+            activity=discord.Streaming(name='TurboC es completamente basura',
                                        url='https://www.twitch.tv/tugfammg'))
         await asyncio.sleep(3)
         await bot.change_presence(activity=discord.Streaming(
-            name='Lindos', url='https://www.twitch.tv/tugfammg'))
+            name='Roberto lindo', url='https://www.twitch.tv/tugfammg'))
     await bot.process_commands(status_task)
 
 
 @bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
-    bot.loop.create_task(status_task()) #crea el loop para los change_presence
+    bot.loop.create_task(status_task())  # Create loop/task
 
 
 @bot.event
@@ -193,6 +193,9 @@ async def on_message(message):
         quote = get_quote()
         await message.channel.send(quote)
 
+    if message.content.lower() == "yon":
+        await message.channel.send('Mi hombre')
+        await message.channel.send(file=discord.File('resources/YON.jpg'))
     
     if message.content.lower() == "elmago":
         await message.channel.send(file=discord.File('resources/Mago.jpg'))
@@ -200,14 +203,21 @@ async def on_message(message):
     if message.content.lower() == "digod":
         await message.channel.send(file=discord.File('resources/Digod.jpg'))
 
+    if message.content.lower() == "sexo":
+        await message.channel.send(
+            'Lo unico que no vas a heredar de tus padres.')
+
+    if message.content.lower() == "leonel":
+        await message.channel.send(file=discord.File('resources/esposa.jpg'))
 
     if message.content.lower() == "te quiero mucho":
         await message.channel.send(file=discord.File('resources/mp4.gif'))
-
         await message.add_reaction("🥰")
     if message.content.lower() == "passchipeada":
         await message.channel.send(file=discord.File('resources/leonel.c'))
 
+    if message.content.lower() == "infravalorada":
+        await message.channel.send(file=discord.File('resources/yichu.jpg'))
 
     if message.content.lower() == "¿quien soy?":
         await message.channel.send('Vos sos @{}'.format(message.author.name))
@@ -223,19 +233,34 @@ async def on_message(message):
     if message.content.startswith("!hello"):
             await message.reply("Hello!", mention_author=True)
 
-    if message.content.lower() == "TC20":
+    if message.content.lower() == "grevinpaja":
         await message.channel.send(file=discord.File('TAREAS/Munecos.C'))
         await message.channel.send(file=discord.File('TAREAS/tupapa.h'))
         await message.channel.send(file=discord.File('TAREAS/MARIOBROS.h'))
 
-    if message.content.lower() == "GOD":
+    if message.content.lower() == "lovo":
         await message.channel.send(file=discord.File('resources/lovo.mp4'))
 
+    if message.content.lower() == "*dormir*":
+        await message.reply('¿Vamos a dormir (。U⁄ ⁄ω⁄ ⁄ U。)??', mention_author=True)
+        await message.add_reaction("😳")
+        await message.channel.send(file=discord.File('waifu/dormir.png'))
+
+    if message.content.lower() == "*me siento triste*":
+        await message.channel.send('¿Que tenés bb? contame u.u')
+        await message.channel.send(file=discord.File('waifu/triste.gif'))
+
+    if message.content.lower() == "*te cuento*":
+        await message.channel.send('contame')
+        await message.channel.send(file=discord.File('waifu/contame.gif'))
+
+    if message.content.lower().startswith("lo que pasa es que"):
+        await message.channel.send('¿Y como te hace sentir eso?')
+        await message.channel.send(file=discord.File('waifu/feeling.gif'))
 
     if message.content.lower() == "logouni3d":
         await message.channel.send(file=discord.File('resources/cuento.c'))
-    if message.content.lower() == "chepito":
-        await message.channel.send(file=discord.File('video.mp4'))
+
 
     await bot.process_commands(message)
 
@@ -244,18 +269,22 @@ async def setup():
     await bot.wait_until_ready()
 
 
+async def on_message_delete(self, message):
+    msg = f"{message.author} has deleted the message: {message.content}"
+    await message.channel.send(msg)
+
 
 @bot.command()
 async def repeat(ctx, times: int, content="repeating..."):
-    """Repite un mensaje muchas veces."""
+    """Repeats a message multiple times."""
     for i in range(times):
         await ctx.send(content)
 
 
 @bot.command()
 async def joined(ctx, member: discord.Member):
-    """Te dice cuando entro un miembro."""
-    await ctx.send(f"{member.name} Entro en{member.joined_at}")
+    """Says when a member joined."""
+    await ctx.send(f"{member.name} Entro una puta en {member.joined_at}")
 
 @bot.command(
     # ADDS THIS VALUE TO THE $HELP PRINT MESSAGE.
@@ -290,7 +319,20 @@ brief="Resumen para medir la complejidad de una estructura de datos en un ejecuc
 async def algorspeed(ctx):
   await ctx.channel.send('Complejidad de algoritmo')
   await ctx.channel.send(file=discord.File('resources/complejidad.txt'))
-  
+
+@bot.command(help="Lista de servidores",
+brief="Displayea una lista de servidores donde se encuentra el bot")
+async def servidores(ctx):
+  await ctx.channel.send("Estoy en " + str(len(bot.guilds)) + " servidores!")
+
+@bot.command()
+async def kick(ctx, member: discord.Member, *, reason=None):
+
+    await member.kick(reason=reason)
+
+    await ctx.send(f'El usuario {member} fue turqueado.')
+
+
 bot.add_cog(Music(bot))
 bot.loop.create_task(setup())
 
