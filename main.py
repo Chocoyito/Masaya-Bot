@@ -152,11 +152,6 @@ class Music(commands.Cog):
             ctx.voice_client.stop()
 
 
-bot = commands.Bot(
-    command_prefix=commands.when_mentioned_or("$"),
-    description="Sangre Nueva pa",
-)
-
 
 @bot.event
 async def status_task():
