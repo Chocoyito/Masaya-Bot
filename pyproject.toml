@@ -19,6 +19,7 @@ asyncpg = "^0.24.0"
 task = "^0.2.5"
 tasks = "^2.8.0"
 pycord = "^0.0.1"
+roles = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 

@@ -6,12 +6,13 @@ import requests
 import json
 from discord.ext import commands
 import asyncio
+import roles
 
 load_dotenv()
 import tracemalloc
 import youtube_dl
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.members = True
 
 bot = commands.Bot(command_prefix="$", intents=intents)
@@ -177,6 +178,18 @@ async def status_task():
             name='Roberto lindo', url='https://www.twitch.tv/tugfammg'))
     await bot.process_commands(status_task)
 
+@bot.event
+async def on_raw_reaction_add(payload):
+    if payload.member.bot:
+      pass
+    else:
+
+      with open('reactrole.json') as react_file:
+        data = json.load(react_file)
+        for x in data:
+          if x['emoji'] == payload.emoji.name and x['message_id'] == payload.message_id:
+            role = discord.utils.get(bot.get_guild(payload.guild_id).roles, id=x['role_id'])  
+            await payload.member.add_roles(role)
 
 @bot.event
 async def on_ready():
@@ -363,7 +376,29 @@ async def serverinfo(ctx):
 @bot.command()
 async def avatar(ctx, *,  avamember : discord.Member=None):
     userAvatarUrl = avamember.avatar_url
-    await ctx.send(userAvatarUrl)    
+    await ctx.send(userAvatarUrl)
+
+@bot.command()
+async def reactrole(ctx,emoji,role: discord.Role,*,message):
+
+  emb = discord.Embed(description=message)
+  msg = await ctx.channel.send(embed=emb)
+  await msg.add_reaction(emoji)
+  
+  with open('reactrole.json') as json_file:
+    data = json.load(json_file)
+
+    new_react_role = {
+      'role_name':role.name,
+      'role_id':role.id,
+      'emoji': emoji,
+      'message_id': message.id
+    }
+    data.append(new_react_role)
+    
+  with open('reactrole.json','w') as j:
+    json.dump(data,j,indent=4)
+
 
 bot.add_cog(Music(bot))
 bot.loop.create_task(setup())

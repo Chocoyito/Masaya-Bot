@@ -411,6 +411,14 @@ typing-extensions = ">=3.7.4,<4.0.0"
 jupyter = ["ipywidgets (>=7.5.1,<8.0.0)"]
 
 [[package]]
+name = "roles"
+version = "1.0.0"
+description = "Role based software development"
+category = "main"
+optional = false
+python-versions = ">=3.7,<4.0"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -534,7 +542,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "4760ba917c7b8f7ffe276a837cef3d33b4b76201f229752a4794817212f142ef"
+content-hash = "0655f9d51c463226c420cd3693ec24eb0112e3c7f5cd88969a60128b2a79d44e"
 
 [metadata.files]
 aiohttp = [
@@ -944,6 +952,10 @@ requests = [
 rich = [
     {file = "rich-9.13.0-py3-none-any.whl", hash = "sha256:9004f6449c89abadf689dad6f92393e760b8c3a8a8c4ea6d8d474066307c0e66"},
     {file = "rich-9.13.0.tar.gz", hash = "sha256:d59e94a0e3e686f0d268fe5c7060baa1bd6744abca71b45351f5850a3aaa6764"},
+]
+roles = [
+    {file = "roles-1.0.0-py3-none-any.whl", hash = "sha256:5d7595df077e7a39db7edc36322b52ea861c7da65be2dd329f8b487a56f37494"},
+    {file = "roles-1.0.0.tar.gz", hash = "sha256:123d843e38c6e578c15533eb2c7cf98aaf53cbaa9fe78dc318dbc61297e2ed61"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
