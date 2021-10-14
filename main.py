@@ -392,7 +392,7 @@ async def reactrole(ctx,emoji,role: discord.Role,*,message):
       'role_name':role.name,
       'role_id':role.id,
       'emoji': emoji,
-      'message_id': message.id
+      'message_id': msg.id
     }
     data.append(new_react_role)
     
