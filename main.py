@@ -6,7 +6,7 @@ import requests
 import json
 from discord.ext import commands
 import asyncio
-import roles
+
 
 load_dotenv()
 import tracemalloc
@@ -190,6 +190,23 @@ async def on_raw_reaction_add(payload):
           if x['emoji'] == payload.emoji.name and x['message_id'] == payload.message_id:
             role = discord.utils.get(bot.get_guild(payload.guild_id).roles, id=x['role_id'])  
             await payload.member.add_roles(role)
+
+@bot.event
+async def on_raw_reaction_remove(payload):
+
+    with open('reactrole.json') as react_file:
+        data = json.load(react_file)
+        guild = bot.get_guild(payload.guild_id)
+     
+        member = guild.get_member(payload.user_id)
+        for x in data:
+            if x['emoji'] == payload.emoji.name:
+                role = discord.utils.get(bot.get_guild(
+                    payload.guild_id).roles, id=x['role_id'])
+
+        
+                await member.remove_roles(role)
+
 
 @bot.event
 async def on_ready():
@@ -379,6 +396,7 @@ async def avatar(ctx, *,  avamember : discord.Member=None):
     await ctx.send(userAvatarUrl)
 
 @bot.command()
+@commands.has_permissions(administrator=True, manage_roles=True)
 async def reactrole(ctx,emoji,role: discord.Role,*,message):
 
   emb = discord.Embed(description=message)

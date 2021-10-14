@@ -10,5 +10,11 @@
         "role_id": 792557790357880843,
         "emoji": "\ud83d\udee1\ufe0f",
         "message_id": 898315253706801182
+    },
+    {
+        "role_name": "Paladin",
+        "role_id": 898316301003550780,
+        "emoji": "\ud83d\udee1\ufe0f",
+        "message_id": 898316504188223529
     }
 ]
