@@ -183,6 +183,7 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
     bot.loop.create_task(status_task())  # Create loop/task
 
+  
 
 @bot.event
 async def on_message(message):
@@ -206,6 +207,11 @@ async def on_message(message):
     if message.content.lower() == "sexo":
         await message.channel.send(
             'Lo unico que no vas a heredar de tus padres.')
+
+    if message.content.lower() == "rodrigo":
+        await message.channel.send(
+            'Anda busca como estudiar tilin.')
+        await message.channel.send(file=discord.File('resources/loli.jpg'))
 
     if message.content.lower() == "leonel":
         await message.channel.send(file=discord.File('resources/esposa.jpg'))
@@ -261,7 +267,12 @@ async def on_message(message):
     if message.content.lower() == "logouni3d":
         await message.channel.send(file=discord.File('resources/cuento.c'))
 
+    if message.content.lower().startswith("buenos dias"):
+      await message.author.send('Buenos dias mi amor')
+      await message.author.send(file=discord.File('resources/amor.gif'))
 
+    if message.content.lower().startswith("$repeat"):
+      await message.channel.send("(!) Comando deshabilitado temporalmente. (!)")
     await bot.process_commands(message)
 
 
@@ -274,12 +285,14 @@ async def on_message_delete(self, message):
     await message.channel.send(msg)
 
 
+
+'''
 @bot.command()
 async def repeat(ctx, times: int, content="repeating..."):
     """Repeats a message multiple times."""
-    for i in range(times):
+    for i in range(10):
         await ctx.send(content)
-
+'''
 
 @bot.command()
 async def joined(ctx, member: discord.Member):
@@ -332,6 +345,25 @@ async def kick(ctx, member: discord.Member, *, reason=None):
 
     await ctx.send(f'El usuario {member} fue turqueado.')
 
+format = "%a, %d %b %Y | %H:%M:%S %ZGMT"
+
+@bot.command()
+@commands.guild_only()
+async def serverinfo(ctx):
+    embed = discord.Embed(
+    )
+    text_channels = len(ctx.guild.text_channels)
+    voice_channels = len(ctx.guild.voice_channels)
+    categories = len(ctx.guild.categories)
+    channels = text_channels + voice_channels
+    embed.set_thumbnail(url = str(ctx.guild.icon_url))
+    embed.add_field(name = f"Information About **{ctx.guild.name}**: ", value = f":white_small_square: ID: **{ctx.guild.id}** \n:white_small_square: Owner: **{ctx.guild.owner}** \n:white_small_square: Location: **{ctx.guild.region}** \n:white_small_square: Creation: **{ctx.guild.created_at.strftime(format)}** \n:white_small_square: Members: **{ctx.guild.member_count}** \n:white_small_square: Channels: **{channels}** Channels; **{text_channels}** Text, **{voice_channels}** Voice, **{categories}** Categories \n:white_small_square: Verification: **{str(ctx.guild.verification_level).upper()}** \n:white_small_square: Features: {', '.join(f'**{x}**' for x in ctx.guild.features)} \n:white_small_square: Splash: {ctx.guild.splash}")
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def avatar(ctx, *,  avamember : discord.Member=None):
+    userAvatarUrl = avamember.avatar_url
+    await ctx.send(userAvatarUrl)    
 
 bot.add_cog(Music(bot))
 bot.loop.create_task(setup())
