@@ -89,17 +89,11 @@ async def on_message(message):
         quote = get_quote()
         await message.channel.send(quote)
 
-    if message.content.lower() == "yon":
+    if message.content.lower() == "*yon*":
         await message.channel.send('Mi hombre')
         await message.channel.send(file=discord.File('resources/YON.jpg'))
-    
-    if message.content.lower() == "elmago":
-        await message.channel.send(file=discord.File('resources/Mago.jpg'))
 
-    if message.content.lower() == "digod":
-        await message.channel.send(file=discord.File('resources/Digod.jpg'))
-
-    if message.content.lower() == "sexo":
+    if message.content.lower() == "*sexo*":
         await message.channel.send(
             'Lo unico que no vas a heredar de tus padres.')
 
@@ -129,11 +123,6 @@ async def on_message(message):
     if message.content.startswith("!hello"):
             await message.reply("Hello!", mention_author=True)
 
-    if message.content.lower() == "grevinpaja":
-        await message.channel.send(file=discord.File('TAREAS/Munecos.C'))
-        await message.channel.send(file=discord.File('TAREAS/tupapa.h'))
-        await message.channel.send(file=discord.File('TAREAS/MARIOBROS.h'))
-
     if message.content.lower() == "lovo":
         await message.channel.send(file=discord.File('resources/lovo.mp4'))
 
@@ -150,7 +139,7 @@ async def on_message(message):
         await message.channel.send('contame')
         await message.channel.send(file=discord.File('waifu/contame.gif'))
 
-    if message.content.lower().startswith("lo que pasa es que"):
+    if message.content.lower().startswith("*lo que pasa es que*"):
         await message.channel.send('¿Y como te hace sentir eso?')
         await message.channel.send(file=discord.File('waifu/feeling.gif'))
 
