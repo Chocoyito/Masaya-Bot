@@ -16,5 +16,35 @@
         "role_id": 898316301003550780,
         "emoji": "\ud83d\udee1\ufe0f",
         "message_id": 898316504188223529
+    },
+    {
+        "role_name": "UCA",
+        "role_id": 900818963926237305,
+        "emoji": "\ud83c\udff3\ufe0f\u200d\ud83c\udf08",
+        "message_id": 907869180903161896
+    },
+    {
+        "role_name": "pichudos",
+        "role_id": 898314739925532722,
+        "emoji": "\ud83d\udc1f",
+        "message_id": 907870803897483314
+    },
+    {
+        "role_name": "pichudos",
+        "role_id": 898314739925532722,
+        "emoji": "\ud83d\udc1f",
+        "message_id": 907871393000079380
+    },
+    {
+        "role_name": "pichudos",
+        "role_id": 898314739925532722,
+        "emoji": "\ud83c\udff3\ufe0f\u200d\ud83c\udf08",
+        "message_id": 907876803169894401
+    },
+    {
+        "role_name": "UCA",
+        "role_id": 900818963926237305,
+        "emoji": "\ud83c\udff3\ufe0f\u200d\ud83c\udf08",
+        "message_id": 907877029821677648
     }
 ]
