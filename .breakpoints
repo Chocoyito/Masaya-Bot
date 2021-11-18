@@ -1,11 +1,41 @@
 {
   "files": {
+    "cogs/music.py": [
+      {
+        "id": "19f187ea-9bf0-45a6-8251-2a89cf528a29",
+        "line": 2,
+        "version": 199,
+        "index": 4
+      }
+    ],
+    "config.py": [
+      {
+        "id": "9790f686-c979-4568-8a95-cfc7640361bf",
+        "line": 1,
+        "version": 3,
+        "index": 0
+      }
+    ],
     "main.py": [
       {
-        "id": "a9effb2e-13d3-432a-833f-8b341185f78d",
-        "line": 336,
-        "version": 9702,
-        "index": 12498
+        "id": "1effd80b-23f6-4a86-b81b-301ebd73749d",
+        "line": 172,
+        "version": 17390,
+        "index": 6013
+      },
+      {
+        "id": "766aba3c-4a17-4470-b40e-6351b9ad9155",
+        "line": 172,
+        "version": 17390,
+        "index": 6013
+      }
+    ],
+    "roles.py": [
+      {
+        "id": "5f934132-3d23-4113-ba57-c88c1b8039cb",
+        "line": 15,
+        "version": 625,
+        "index": 371
       }
     ]
   }

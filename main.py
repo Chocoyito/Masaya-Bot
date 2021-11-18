@@ -8,7 +8,6 @@ from discord.ext import commands
 import asyncio
 load_dotenv()
 import tracemalloc
-import youtube_dl
 
 
 intents = discord.Intents.all()
@@ -23,134 +22,6 @@ def get_quote():
     json_data = json.loads(response.text)
     quote = json_data[0]['q'] + " -" + json_data[0]['a']
     return (quote)
-
-youtube_dl.utils.bug_reports_message = lambda: ""
-
-ytdl_format_options = {
-    "format": "bestaudio/best",
-    "outtmpl": "%(extractor)s-%(id)s-%(title)s.%(ext)s",
-    "restrictfilenames": True,
-    "noplaylist": True,
-    "nocheckcertificate": True,
-    "ignoreerrors": False,
-    "logtostderr": False,
-    "quiet": True,
-    "no_warnings": True,
-    "default_search": "auto",
-    "source_address":
-    "0.0.0.0",  # bind to ipv4 since ipv6 addresses cause issues sometimes
-}
-
-ffmpeg_options = {"options": "-vn"}
-
-ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-
-
-class YTDLSource(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=0.5):
-        super().__init__(source, volume)
-
-        self.data = data
-
-        self.title = data.get("title")
-        self.url = data.get("url")
-
-    @classmethod
-    async def from_url(cls, url, *, loop=None, stream=False):
-        loop = loop or asyncio.get_event_loop()
-        data = await loop.run_in_executor(
-            None, lambda: ytdl.extract_info(url, download=not stream))
-
-        if "entries" in data:
-            # take first item from a playlist
-            data = data["entries"][0]
-
-        filename = data["url"] if stream else ytdl.prepare_filename(data)
-        return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options),
-                   data=data)
-
-
-class Music(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    @commands.command()
-    async def join(self, ctx, *, channel: discord.VoiceChannel):
-        """Entra a un canal de voz"""
-
-        if ctx.voice_client is not None:
-            return await ctx.voice_client.move_to(channel)
-
-        await channel.connect()
-
-    @commands.command()
-    async def play(self, ctx, *, query):
-        """Reproduce una cancion almacenada en el bot"""
-        
-        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query))
-        ctx.voice_client.play(source,
-                              after=lambda e: print(f"Player error: {e}")
-                              if e else None)
-
-        await ctx.send(f"Reproduciendo: {query}")
-
-    @commands.command()
-    async def yt(self, ctx, *, url):
-        """Reproduce desde un url (todo lo que pueda soportar youtube_dl)"""
-
-        async with ctx.typing():
-            player = await YTDLSource.from_url(url, loop=self.bot.loop)
-            ctx.voice_client.play(player,
-                                  after=lambda e: print(f"Player error: {e}")
-                                  if e else None)
-
-        await ctx.send(f"🎶 Reproduciendo: {player.title} 🎶")
-
-    @commands.command()
-    async def stream(self, ctx, *, url):
-        """Streamea desde un url (lo mismo que yt, pero no lo descarga)"""
-
-        async with ctx.typing():
-            player = await YTDLSource.from_url(url,
-                                               loop=self.bot.loop,
-                                               stream=True)
-            ctx.voice_client.play(player,
-                                  after=lambda e: print(f"Player error: {e}")
-                                  if e else None)
-
-        await ctx.send(f"🎶 Reproduciendo:  {player.title}  🎶")
-
-    @commands.command()
-    async def volume(self, ctx, volume: int):
-        """Cambia el volumen del bot"""
-
-        if ctx.voice_client is None:
-            return await ctx.send("No estoy conectada a un canal de voz.")
-
-        ctx.voice_client.source.volume = volume / 100
-        await ctx.send(f"Cambia el volumen a{volume}%")
-
-    @commands.command()
-    async def stop(self, ctx):
-        """Para y desconecta al bot del canal"""
-
-        await ctx.voice_client.disconnect()
-
-    @play.before_invoke
-    @yt.before_invoke
-    @stream.before_invoke
-    async def ensure_voice(self, ctx):
-        if ctx.voice_client is None:
-            if ctx.author.voice:
-                await ctx.author.voice.channel.connect()
-            else:
-                await ctx.send("No estas conectado a un canal de voz UwU.")
-                raise commands.CommandError(
-                    "Author not connected to a voice channel.")
-        elif ctx.voice_client.is_playing():
-            ctx.voice_client.stop()
-
-
 
 @bot.event
 async def status_task():
@@ -286,8 +157,6 @@ async def on_message(message):
     if message.content.lower() == "logouni3d":
         await message.channel.send(file=discord.File('resources/cuento.c'))
 
-    if message.content.lower().startswith("$repeat"):
-      await message.channel.send("(!) Comando deshabilitado temporalmente. (!)")
     await bot.process_commands(message)
 
 
@@ -300,19 +169,10 @@ async def on_message_delete(self, message):
     await message.channel.send(msg)
 
 
-
-'''
-@bot.command()
-async def repeat(ctx, times: int, content="repeating..."):
-    """Repeats a message multiple times."""
-    for i in range(10):
-        await ctx.send(content)
-'''
-
 @bot.command()
 
 async def joined(ctx, member: discord.Member):
-      """Says when a member joined."""
+      """Dice la fecha exacta cuando entro un miembro."""
       await ctx.send(f"{member.name} Entro una puta en {member.joined_at}")
 
 @bot.command(
@@ -340,7 +200,7 @@ async def ping(ctx):
 async def servidores(ctx):
     await ctx.channel.send("Estoy en " + str(len(bot.guilds)) + " servidores!")
 
-@bot.command()
+@bot.command(brief="Expulsa un miembro del servidor (El bot tiene que tener mayor rango que el miembro a expulsar).")
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member, *, reason=None):
       username_1 = ctx.message.author.name
@@ -401,9 +261,9 @@ async def reactrole(ctx,emoji,role: discord.Role,titulo,*,message):
       json.dump(data,j,indent=4)
 
 
-bot.add_cog(Music(bot))
 bot.loop.create_task(setup())
 bot.load_extension("cogs.simple")
 # bot.load_extension("cogs.comandos")
 bot.load_extension("cogs.music")
+bot.load_extension("cogs.wiki")
 bot.run(os.getenv('TOKEN'))

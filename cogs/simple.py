@@ -11,7 +11,7 @@ For a list of events:
 http://discordpy.readthedocs.io/en/rewrite/api.html#event-reference
 http://discordpy.readthedocs.io/en/rewrite/ext/commands/api.html#event-reference
 """
-
+"""Ejemplo de cogs que estoy siguiendo 14/11/2021"""
 
 class SimpleCog(commands.Cog):
     """SimpleCog"""
@@ -19,17 +19,10 @@ class SimpleCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='repeat', aliases=['copy', 'mimic'])
-    async def do_repeat(self, ctx, *, our_input: str):
-        """A simple command which repeats our input.
-        In rewrite Context is automatically passed to our commands as the first argument after self."""
-
-        await ctx.send(our_input)
-
     @commands.command(name='add', aliases=['plus'])
     @commands.guild_only()
     async def do_addition(self, ctx, first: int, second: int):
-        """A simple command which does addition on two integer values."""
+        """Comando Simple para sumar (Prueba de Cogs."""
 
         total = first + second
         await ctx.send(f'The sum of **{first}** and **{second}**  is  **{total}**')
@@ -37,15 +30,15 @@ class SimpleCog(commands.Cog):
     @commands.command(name='me')
     @commands.is_owner()
     async def only_me(self, ctx):
-        """A simple command which only responds to the owner of the bot."""
+        """Comando simple que solo le responde al dueño."""
 
         await ctx.send(f'Hello {ctx.author.mention}. This command can only be used by you!!')
 
     @commands.command(name='embeds')
     @commands.guild_only()
     async def example_embed(self, ctx):
-        """A simple command which showcases the use of embeds.
-        Have a play around and visit the Visualizer."""
+        """Comando de ejemplo para los embeds, con esto se realizo el comando $reactrole.
+        xD."""
 
         embed = discord.Embed(title='Example Embed',
                               description='Showcasing the use of Embeds...\nSee the visualizer for more info.',
