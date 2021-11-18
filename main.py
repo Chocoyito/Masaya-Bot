@@ -104,7 +104,7 @@ class Music(commands.Cog):
                                   after=lambda e: print(f"Player error: {e}")
                                   if e else None)
 
-        await ctx.send(f"Reproduciendo: {player.title}")
+        await ctx.send(f"🎶 Reproduciendo: {player.title} 🎶")
 
     @commands.command()
     async def stream(self, ctx, *, url):
@@ -118,7 +118,7 @@ class Music(commands.Cog):
                                   after=lambda e: print(f"Player error: {e}")
                                   if e else None)
 
-        await ctx.send(f"Reproduciendo: {player.title}")
+        await ctx.send(f"🎶 Reproduciendo:  {player.title}  🎶")
 
     @commands.command()
     async def volume(self, ctx, volume: int):
@@ -405,5 +405,5 @@ bot.add_cog(Music(bot))
 bot.loop.create_task(setup())
 bot.load_extension("cogs.simple")
 # bot.load_extension("cogs.comandos")
-
+bot.load_extension("cogs.music")
 bot.run(os.getenv('TOKEN'))
