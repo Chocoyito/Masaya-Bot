@@ -260,7 +260,7 @@ async def help(ctx):
 
   embed.add_field(name='**ma$queue**', value='- Muestra la cola actual ', inline=False)
 
-  embed.add_field(name='Contact Dev', value = "[Development Status](https://github.com/LemonMantis5571/Masaya-Bot)")
+  embed.add_field(name='Source Code and More', value = "[Development Status](https://github.com/LemonMantis5571/Masaya-Bot)")
 
   embed.set_footer(text = "LemonMantis", icon_url = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
 
@@ -292,7 +292,7 @@ async def help(ctx):
 
   embedido.add_field(name='**ma$say**', value='- Repite lo que escribiste', inline=False)
 
-  embedido.add_field(name='Contact Dev', value = "[Development Status](https://github.com/LemonMantis5571/Masaya-Bot)")
+  embedido.add_field(name='Source Code and More', value = "[Development Status](https://github.com/LemonMantis5571/Masaya-Bot)")
   embedido.set_footer(text = "LemonMantis", icon_url = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
   await author.send(embed=embedido)
 
