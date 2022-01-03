@@ -2,7 +2,6 @@
 """ Update al music, poco a poco, sigo viendo el video de cogs, por el momento funciona, aun no se hacen pruebas de alto calibre."""
 import discord
 from discord.ext import commands
-
 import asyncio
 import itertools
 import sys
@@ -10,6 +9,7 @@ import traceback
 from async_timeout import timeout
 from functools import partial
 from youtube_dl import YoutubeDL
+
 
 
 ytdlopts = {
@@ -32,7 +32,6 @@ ffmpegopts = {
 }
 
 ytdl = YoutubeDL(ytdlopts)
-
 
 class VoiceConnectionError(commands.CommandError):
     """Custom Exception class for connection errors."""
@@ -255,7 +254,6 @@ class Music(commands.Cog):
             The song to search and retrieve using YTDL. This could be a simple search, an ID or URL.
         """
         await ctx.trigger_typing()
-
         vc = ctx.voice_client
 
         if not vc:
@@ -331,7 +329,7 @@ class Music(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(name='minfo', aliases=['np', 'current', 'currentsong', 'playing'])
+    @commands.command(name='minfo', aliases=['np',  'current', 'currentsong', 'playing'])
     async def now_playing_(self, ctx):
         """Displayea informacion sobre la cancion actual."""
         vc = ctx.voice_client
@@ -362,7 +360,7 @@ class Music(commands.Cog):
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('I am not currently connected to voice!', delete_after=20)
+            return await ctx.send('No estoy conectada a un canal de voz!', delete_after=10)
 
         if not 0 < vol < 101:
             return await ctx.send('Porfis ingresa un valor entre 1 y 100.')
@@ -382,9 +380,10 @@ class Music(commands.Cog):
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('No estoy reproduciendo nada >.<!', delete_after=20)
+            return await ctx.send('No estoy reproduciendo nada >.<!', delete_after=10)
 
         await self.cleanup(ctx.guild)
+
 
 
 def setup(bot):

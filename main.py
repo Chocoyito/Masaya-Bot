@@ -12,10 +12,11 @@ import tracemalloc
 
 intents = discord.Intents.all()
 intents.members = True
+activity = discord.Activity(type=discord.ActivityType.listening, name="TWICE")
 
-bot = commands.Bot(command_prefix="$", intents=intents)
+bot = commands.Bot(command_prefix="ma$", intents=intents,activity=activity)
 tracemalloc.start()
-
+bot.remove_command('help')
 
 def get_quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -23,25 +24,6 @@ def get_quote():
     quote = json_data[0]['q'] + " -" + json_data[0]['a']
     return (quote)
 
-@bot.event
-async def status_task():
-    while True:
-        await bot.change_presence(activity=discord.Game("Lovo lindo"),
-                                  status=discord.Status.idle)
-        await asyncio.sleep(3)  # cambia luego de x segundos
-        await bot.change_presence(activity=discord.Game("Paja"),
-                                  status=discord.Status.idle)
-        await asyncio.sleep(3)
-        await bot.change_presence(activity=discord.Game("Pornhub"),
-                                  status=discord.Status.idle)
-        await asyncio.sleep(3)
-        await bot.change_presence(
-            activity=discord.Streaming(name='TurboC es completamente basura',
-                                       url='https://www.twitch.tv/tugfammg'))
-        await asyncio.sleep(3)
-        await bot.change_presence(activity=discord.Streaming(
-            name='Roberto lindo', url='https://www.twitch.tv/tugfammg'))
-    await bot.process_commands(status_task)
 
 @bot.event
 async def on_raw_reaction_add(payload):
@@ -76,7 +58,6 @@ async def on_raw_reaction_remove(payload):
 @bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
-    bot.loop.create_task(status_task())  # Create loop/task
 
   
 
@@ -162,7 +143,7 @@ async def on_message_delete(self, message):
 
 async def joined(ctx, member: discord.Member):
       """Dice la fecha exacta cuando entro un miembro."""
-      await ctx.send(f"{member.name} Entro una puta en {member.joined_at}")
+      await ctx.send(f"{member.name} Entro en {member.joined_at}")
 
 @bot.command(
       # ADDS THIS VALUE TO THE $HELP PRINT MESSAGE.
@@ -249,6 +230,71 @@ async def reactrole(ctx,emoji,role: discord.Role,titulo,*,message):
     with open('reactrole.json','w') as j:
       json.dump(data,j,indent=4)
 
+
+@bot.command()
+async def help(ctx):
+
+  author = ctx.channel
+
+  embed = discord.Embed(
+      color = discord.Colour.blue()
+  )
+  
+  embed.set_author(name='🍓 Lista de Comandos (Musica)')
+
+  embed.add_field(name='**ma$stream**', value='- Reproduce musica sin descargarla (Nombre,url)', inline=False)
+
+  embed.add_field(name='**ma$pausar**', value='- Pausa la Musica Correspondiente ', inline=False)
+
+  embed.add_field(name='**ma$stop**', value='- Detiene cualquier accion del bot', inline=False)
+
+  embed.add_field(name='**ma$skip**', value='- Quita la musica actual y continua la siguiente en la cola', inline=False)
+
+  embed.add_field(name='**ma$reanudar**', value='- Reproduce musica anteriormente pausada', inline=False)
+
+  embed.add_field(name='**ma$minfo**', value='- Informacion sobre la musica actual ', inline=False)
+
+  embed.add_field(name='**ma$join**', value='- Entra a un canal de voz especifico ', inline=False)
+
+  embed.add_field(name='**ma$volumen**', value='- Sube o baja el volumen del Bot ', inline=False)
+
+  embed.add_field(name='**ma$queue**', value='- Muestra la cola actual ', inline=False)
+
+  embed.add_field(name='Contact Dev', value = "[Development Status](https://github.com/LemonMantis5571/Masaya-Bot)")
+
+  embed.set_footer(text = "LemonMantis", icon_url = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
+
+  await author.send(embed=embed)
+
+  embedido = discord.Embed(
+      color = discord.Colour.orange()
+  )
+
+  embedido.set_author(name='🎁 Lista de Comandos (Generales)')
+
+  embedido.add_field(name='**ma$me**', value='- Comando que solo funciona al Creador del servidor', inline=False)
+
+  embedido.add_field(name='**ma$ping**', value='- Devuelve pong si todo funciona bien', inline=False)
+
+  embedido.add_field(name='**ma$wiki**', value='- Busca lo que sea en wikipedia, tienes que ser muy especifico', inline=False)
+
+  embedido.add_field(name='**ma$serverinfo**', value='- Muestra informacion basica sobre el servidor', inline=False)
+
+  embedido.add_field(name='**ma$servidores**', value='- Numero de servers donde se encuentra el bot', inline=False)
+
+  embedido.add_field(name='**ma$joined**', value='- Muestra cuando se unio cierto miembro al servidor', inline=False)
+
+  embedido.add_field(name='**ma$ping**', value='- Devuelve pong si todo funciona bien', inline=False)
+
+  embedido.add_field(name='**ma$reactrole**', value='- Crea roles mediante reaccion', inline=False)
+
+  embedido.add_field(name='**ma$avatar**', value='- Muestra el avatar del usuario mencionado', inline=False)
+
+  embedido.add_field(name='**ma$say**', value='- Repite lo que escribiste', inline=False)
+
+  embedido.add_field(name='Contact Dev', value = "[Development Status](https://github.com/LemonMantis5571/Masaya-Bot)")
+  embedido.set_footer(text = "LemonMantis", icon_url = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
+  await author.send(embed=embedido)
 
 bot.loop.create_task(setup())
 bot.load_extension("cogs.simple")
