@@ -16,3 +16,5 @@ Discord : LemonMantis#8924
 League of Legends (LAN) : Li Qiao Meifeng
 
 Lenguajes utilizados : Python, JS, C.
+
+Website del bot:  https://lemondev.carrd.co
