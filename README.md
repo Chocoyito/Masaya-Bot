@@ -13,7 +13,6 @@ Contactame: briter456@gmail.com
 
 Discord : LemonMantis#8924
 
-League of Legends (LAN) : Li Qiao Meifeng
 
 Lenguajes utilizados : Python, JS, C.
 
