@@ -50,7 +50,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         self.title = data.get('title')
         self.web_url = data.get('webpage_url')
 
-        # YTDL info dicts (data) have other useful information you might want
+       
         # https://github.com/rg3/youtube-dl/blob/master/README.md
 
     def __getitem__(self, item: str):
@@ -125,7 +125,7 @@ class MusicPlayer(commands.Cog):
 
             try:
                 # Wait for the next song. If we timeout cancel the player and disconnect...
-                async with timeout(300):  # 5 minutes...
+                async with timeout(300):  # 5 minutos...
                     source = await self.queue.get()
             except asyncio.TimeoutError:
                 return self.destroy(self._guild)
