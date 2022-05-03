@@ -70,65 +70,6 @@ async def on_message(message):
         quote = get_quote()
         await message.channel.send(quote)
 
-    if message.content.lower() == "*yon*":
-        await message.channel.send('Mi hombre')
-        await message.channel.send(file=discord.File('resources/YON.jpg'))
-
-    if message.content.lower() == "*sexo*":
-        await message.channel.send(
-            'Lo unico que no vas a heredar de tus padres.')
-
-    if message.content.lower() == "rodrigo":
-        await message.channel.send(
-            'Anda busca como estudiar tilin.')
-        await message.channel.send(file=discord.File('resources/loli.jpg'))
-
-    if message.content.lower() == "leonel":
-        await message.channel.send(file=discord.File('resources/esposa.jpg'))
-
-    if message.content.lower() == "te quiero mucho":
-        await message.channel.send(file=discord.File('resources/mp4.gif'))
-        await message.add_reaction("🥰")
-    if message.content.lower() == "passchipeada":
-        await message.channel.send(file=discord.File('resources/leonel.c'))
-
-    if message.content.lower() == "infravalorada":
-        await message.channel.send(file=discord.File('resources/yichu.jpg'))
-
-    if message.content.lower() == "¿quien soy?":
-        await message.channel.send('Vos sos @{}'.format(message.author.name))
-
-    if message.content.lower() == "elpepe":
-        await message.channel.send(file=discord.File('resources/elpepe.mp4'))
-
-    if message.content.startswith("!hello"):
-            await message.reply("Hello!", mention_author=True)
-
-    if message.content.lower() == "lovo":
-        await message.channel.send(file=discord.File('resources/lovo.mp4'))
-
-    if message.content.lower() == "*dormir*":
-        await message.reply('¿Vamos a dormir (。U⁄ ⁄ω⁄ ⁄ U。)??', mention_author=True)
-        await message.add_reaction("😳")
-        await message.channel.send(file=discord.File('waifu/dormir.png'))
-
-    if message.content.lower() == "*me siento triste*":
-        await message.channel.send('¿Que tenés bb? contame u.u')
-        await message.channel.send(file=discord.File('waifu/triste.gif'))
-
-    if message.content.lower() == "*te cuento*":
-        await message.channel.send('contame')
-        await message.channel.send(file=discord.File('waifu/contame.gif'))
-
-    if message.content.lower().startswith("*lo que pasa es que*"):
-        await message.channel.send('¿Y como te hace sentir eso?')
-        await message.channel.send(file=discord.File('waifu/feeling.gif'))
-
-    if message.content.lower() == "logouni3d":
-        await message.channel.send(file=discord.File('resources/cuento.c'))
-
-    await bot.process_commands(message)
-
 
 async def setup():
     await bot.wait_until_ready()
